@@ -4,39 +4,34 @@ using System.Text;
 
 namespace ModelLibrary.Model
 {
-    class Survey
+    class User
     {
 
         #region Properties
 
         public int Id { get; set; }
 
-        public int CreatorId { get; set; }
 
-        public string Title { get; set; }
 
-        public bool IsAnonymous { get; set; }
+        public string Name { get; set; }
 
-        public List<Question> Questions { get; set; }
+
 
         #endregion
 
 
         #region Constructor
 
-        public Survey()
-        {
-            
-        }
 
 
         #endregion
 
         #region Methods
 
-        
+
 
         #endregion
+
 
     }
 }

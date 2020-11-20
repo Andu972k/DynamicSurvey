@@ -4,27 +4,19 @@ using System.Text;
 
 namespace ModelLibrary.Model
 {
-    class Survey
+    class Answer
     {
 
         #region Properties
 
-        public int Id { get; set; }
-
-        public int CreatorId { get; set; }
-
-        public string Title { get; set; }
-
-        public bool IsAnonymous { get; set; }
-
-        public List<Question> Questions { get; set; }
+        public string AnswerText { get; set; }
 
         #endregion
 
 
         #region Constructor
 
-        public Survey()
+        public Answer()
         {
             
         }
@@ -34,9 +26,10 @@ namespace ModelLibrary.Model
 
         #region Methods
 
-        
+
 
         #endregion
+
 
     }
 }
