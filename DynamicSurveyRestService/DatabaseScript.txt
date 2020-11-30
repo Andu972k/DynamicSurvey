@@ -1,0 +1,29 @@
+﻿Create Table Creators (
+ID int identity primary key,
+UserName NVARCHAR(30) not null,
+Password NVARCHAR(20) not null
+);
+
+Create Table Users (
+ID int identity primary key,
+Name NVARCHAR(30) null,
+Password NVARCHAR(20) not null
+);
+
+Create Table Surveys (
+ID int identity primary key,
+CreatorID int not null,
+Title NVARCHAR(50),
+Questions NVARCHAR(MAX),
+Foreign key (CreatorID) References Creators(ID)
+);
+
+
+Create Table Answers (
+SurveyID int not null,
+UserID int not null,
+Answers NVARCHAR(MAX),
+Primary Key (SurveyID, UserID),
+Foreign Key (SurveyID) References Surveys(ID),
+Foreign Key (UserID) References Users(ID)
+);

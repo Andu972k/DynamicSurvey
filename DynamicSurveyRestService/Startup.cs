@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DynamicSurveyRestService.Common;
+using DynamicSurveyRestService.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,10 @@ namespace DynamicSurveyRestService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            AppSettings settings = new AppSettings(Configuration);
+            services.AddSingleton(settings);
+            services.AddScoped<DBContext>(sp => new DBContext(settings.ConnectionString));
+            services.AddTransient<SurveysRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
