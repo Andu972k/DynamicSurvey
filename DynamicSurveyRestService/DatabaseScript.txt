@@ -14,6 +14,7 @@ Create Table Surveys (
 ID int identity primary key,
 CreatorID int not null,
 Title NVARCHAR(50),
+IsAnonymous bit not null,
 Questions NVARCHAR(MAX),
 Foreign key (CreatorID) References Creators(ID)
 );

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ModelLibrary.Model
+namespace ModelLibrary.DTO
 {
-    public class Answer
+    public class AnswerDto
     {
 
         #region Properties
@@ -16,16 +16,10 @@ namespace ModelLibrary.Model
 
         #region Constructor
 
-        public Answer()
+        public AnswerDto()
         {
-            
+
         }
-
-
-        #endregion
-
-        #region Methods
-
 
 
         #endregion

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ModelLibrary.Model
 {
-    class Customer
+    ¨public class Customer
     {
 
         #region Properties

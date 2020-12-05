@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DynamicSurveyRestService.Common;
+using ModelLibrary.DTO;
+using ModelLibrary.Model;
 
 namespace DynamicSurveyRestService.DataAccess
 {
@@ -35,10 +37,10 @@ namespace DynamicSurveyRestService.DataAccess
         #region Methods
 
 
-        //public async Task<> CreateSurvey()
-        //{
+        public async Task<CreateSurveyRepsonseDto> CreateSurvey(Survey survey)
+        {
 
-        //}
+        }
 
         #endregion
 

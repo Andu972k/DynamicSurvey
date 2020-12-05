@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModelLibrary.Model;
 
-namespace ModelLibrary.Model
+namespace ModelLibrary.DTO
 {
-    public class Question
+    public class QuestionDto
     {
 
         #region Properties
@@ -13,26 +14,16 @@ namespace ModelLibrary.Model
 
         public int QuestionType { get; set; }
 
-        public List<Answer> Answers { get; set; }
+        public List<AnswerDto> Answers { get; set; }
 
         #endregion
 
 
         #region Constructor
 
-        public Question()
-        {
-            
-        }
-
-        #endregion
-
-        #region Methods
-
 
 
         #endregion
-
 
     }
 }

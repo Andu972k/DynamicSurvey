@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ModelLibrary.Model
+namespace ModelLibrary.DTO
 {
-    public class Survey
+    public class CreateSurveyDto
     {
 
         #region Properties
-
-        public int Id { get; set; }
 
         public int CreatorId { get; set; }
 
@@ -17,26 +15,17 @@ namespace ModelLibrary.Model
 
         public bool IsAnonymous { get; set; }
 
-        public List<Question> Questions { get; set; }
+        public List<QuestionDto> Questions { get; set; }
 
         #endregion
-
 
         #region Constructor
 
-        public Survey()
-        {
-            
-        }
 
 
         #endregion
 
-        #region Methods
 
-        
-
-        #endregion
 
     }
 }
