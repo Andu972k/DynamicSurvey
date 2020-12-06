@@ -13,7 +13,7 @@ namespace ModelLibrary.Model
 
         public int QuestionType { get; set; }
 
-        public List<Answer> Answers { get; set; }
+        public Answer Answer { get; set; }
 
         #endregion
 

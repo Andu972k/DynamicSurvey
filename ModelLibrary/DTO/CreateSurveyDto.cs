@@ -15,7 +15,7 @@ namespace ModelLibrary.DTO
 
         public bool IsAnonymous { get; set; }
 
-        public List<QuestionDto> Questions { get; set; }
+        public List<(string QuestionText, int QuestionType)> Questions { get; set; }
 
         #endregion
 
