@@ -32,12 +32,12 @@ namespace ModelLibrary.Model
             IsAnonymous = surveyToCreate.IsAnonymous;
             Questions = new List<Question>();
 
-            foreach ((string QuestionText, int QuestionType) question in surveyToCreate.Questions)
+            foreach (Tuple<string, int> question in surveyToCreate.Questions)
             {
                 Question tempQuestion = new Question
                 {
-                    QuestionText = question.QuestionText,
-                    QuestionType = question.QuestionType,
+                    QuestionText = question.Item1,
+                    QuestionType = question.Item2,
                     Answer = null
                 };
 

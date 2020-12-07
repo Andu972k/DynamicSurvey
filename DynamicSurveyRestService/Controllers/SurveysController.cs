@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DynamicSurveyRestService.DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using ModelLibrary.DTO;
+using ModelLibrary.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +15,23 @@ namespace DynamicSurveyRestService.Controllers
     [ApiController]
     public class SurveysController : ControllerBase
     {
+
+        #region InstanceFields
+
+        private readonly SurveysRepository _repository;
+
+        #endregion
+
+        #region Constructor
+
+        public SurveysController(SurveysRepository repository)
+        {
+            _repository = repository;
+        }
+
+        #endregion
+
+
         // GET: api/<SurveysController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,8 +48,14 @@ namespace DynamicSurveyRestService.Controllers
 
         // POST api/<SurveysController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<CreateSurveyRepsonseDto> Post([FromBody] CreateSurveyDto surveyInformation)
         {
+            Survey tempSurvey = new Survey(surveyInformation);
+
+            CreateSurveyRepsonseDto repsonse = await _repository.CreateSurvey(tempSurvey);
+
+            return repsonse;
+
         }
 
         // PUT api/<SurveysController>/5
