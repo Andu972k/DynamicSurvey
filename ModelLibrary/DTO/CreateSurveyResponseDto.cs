@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ModelLibrary.DTO
 {
-    public class CreateSurveyRepsonseDto
+    public class CreateSurveyResponseDto
     {
 
         #region Properties

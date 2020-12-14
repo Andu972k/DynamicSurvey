@@ -48,11 +48,11 @@ namespace DynamicSurveyRestService.Controllers
 
         // POST api/<SurveysController>
         [HttpPost]
-        public async Task<CreateSurveyRepsonseDto> Post([FromBody] CreateSurveyDto surveyInformation)
+        public async Task<CreateSurveyResponseDto> Post([FromBody] CreateSurveyDto surveyInformation)
         {
             Survey tempSurvey = new Survey(surveyInformation);
 
-            CreateSurveyRepsonseDto repsonse = await _repository.CreateSurvey(tempSurvey);
+            CreateSurveyResponseDto repsonse = await _repository.CreateSurvey(tempSurvey);
 
             return repsonse;
 

@@ -39,10 +39,10 @@ namespace DynamicSurveyRestService.DataAccess
         #region Methods
 
 
-        public async Task<CreateSurveyRepsonseDto> CreateSurvey(Survey survey)
+        public async Task<CreateSurveyResponseDto> CreateSurvey(Survey survey)
         {
 
-            CreateSurveyRepsonseDto repsonse = new CreateSurveyRepsonseDto();
+            CreateSurveyResponseDto repsonse = new CreateSurveyResponseDto();
 
             using (SqlConnection connection = await _dbContext.OpenConnectionAsync())
             {
@@ -59,7 +59,7 @@ namespace DynamicSurveyRestService.DataAccess
 
                     if (rowsAffected == 1)
                     {
-                        repsonse.ResponseMessage = "Survey was successfully created";
+                        repsonse.ResponseMessage = $"Survey was successfully created with the following Title: {survey.Title}. The first question of the survey is: {survey.Questions[0].QuestionText}";
                     }
 
 
