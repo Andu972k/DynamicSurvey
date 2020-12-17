@@ -31,6 +31,8 @@ namespace DynamicSurveyRestService
             services.AddSingleton(settings);
             services.AddScoped<DBContext>(sp => new DBContext(settings.ConnectionString));
             services.AddTransient<SurveysRepository>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +42,9 @@ namespace DynamicSurveyRestService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options =>
+                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
 

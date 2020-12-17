@@ -1,7 +1,109 @@
 ﻿@page "/creator/createsurvey"
+@inject HttpClient Http
 
 <h3>CreateSurvey</h3>
 
+<input @bind-value="SurveyDto.CreatorId" type="number" placeholder="Creator Id" />
+
+<input @bind-value="SurveyDto.Title" type="text" placeholder="Title" width="100" height="100" size="100" />
+
+<input @bind-value="QuestionText" name="QuestionText" type="text" placeholder="Question Text" width="100" height="100" size="100" />
+@*@bind-value="QuestionText"*@
+<button @onclick="AddQuestion">Add</button>
+<button @onclick="Create">Create</button>
+
+<br/>
+<br/>
+
+<span >@Response</span>
+
+
+
 @code {
+
+    [Parameter]
+    public string QuestionText { get; set; }
+
+    [Parameter]
+    public CreateSurveyDto SurveyDto { get; set; }
+
+    [Parameter]
+    public string Response { get; set; }
+
+
+
+    /*
+     * <input @bind="SurveyDto.CreatorId" type="number" placeholder="Creator Id"/>
+
+<input @bind="SurveyDto.Title" type="text" placeholder="Question Text" width="100" height="100" size="100"/>
+
+<input @bind="QuestionText" type="text" placeholder="Question Text" width="100" height="100" size="100"/>
+
+<button @onclick="AddQuestion">Add</button>
+     */
+
+
+
+    public void AddQuestion()
+    {
+
+        Tuple<string, int> questionTuple = new Tuple<string, int>(QuestionText, 1);
+
+
+
+        SurveyDto.Questions.Add(questionTuple);
+
+        Console.WriteLine(SurveyDto.Questions);
+
+    }
+
+    public async void Create()
+    {
+        HttpResponseMessage responseMessage = await Http.PostAsJsonAsync("http://localhost:57030/Api/Surveys", SurveyDto);
+
+        CreateSurveyResponseDto response = await responseMessage.Content.ReadFromJsonAsync<CreateSurveyResponseDto>();
+
+        Response = response.ResponseMessage;
+    }
+
+    protected override void OnInitialized()
+    {
+        SurveyDto = new CreateSurveyDto();
+
+        SurveyDto.Questions = new List<Tuple<string, int>>();
+    }
+
+
+    public class CreateSurveyDto
+    {
+
+        #region Properties
+
+        public int CreatorId { get; set; }
+
+        public string Title { get; set; }
+
+        public bool IsAnonymous { get; set; }
+
+        public List<Tuple<string, int>> Questions { get; set; }
+
+        #endregion
+
+        public CreateSurveyDto()
+        {
+
+        }
+
+    }
+
+    public class CreateSurveyResponseDto
+    {
+
+        #region Properties
+
+        public string ResponseMessage { get; set; }
+
+        #endregion
+    }
 
 }

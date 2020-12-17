@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLibrary", "ModelLibrar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSurveyTests", "DynamicSurveyTests\DynamicSurveyTests.csproj", "{6441FC3B-7826-405A-8B02-8620C831876C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSurveyWebApp", "DynamicSurveyWebApp\DynamicSurveyWebApp.csproj", "{1C9FABA1-057F-46B1-A099-0025640D30DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSurveyWebApp", "DynamicSurveyWebApp\DynamicSurveyWebApp.csproj", "{1C9FABA1-057F-46B1-A099-0025640D30DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
