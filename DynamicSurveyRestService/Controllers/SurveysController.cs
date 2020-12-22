@@ -52,10 +52,26 @@ namespace DynamicSurveyRestService.Controllers
         {
             Survey tempSurvey = new Survey(surveyInformation);
 
-            CreateSurveyResponseDto repsonse = await _repository.CreateSurvey(tempSurvey);
+            CreateSurveyResponseDto repsonse = await _repository.CreateSurveyAsync(tempSurvey);
 
             return repsonse;
 
+        }
+
+        [HttpPost]
+        [Route("Answer")]
+        public async Task<AnswerSurveyResponseDto> Answer([FromBody] AnswerSurveyDto answer)
+        {
+            Survey tempSurvey = new Survey( null, answer);
+
+            User tempUser = new User
+            {
+                Id = answer.UserId
+            };
+
+            AnswerSurveyResponseDto response = await _repository.AnswerSurveyAsync(tempSurvey, tempUser);
+
+            return response;
         }
 
         // PUT api/<SurveysController>/5
