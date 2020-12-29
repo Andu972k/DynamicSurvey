@@ -22,9 +22,11 @@ namespace DynamicSurveyRestService.DataAccess
 
         #region SQL-Statements
 
+        private const string GetOneStatement = "Select * From Surveys Where ID = @ID";
+
         private const string CreateSurveyStatement = "Insert into Surveys (CreatorID, Title, IsAnonymous, Questions) Values (@CreatorID, @Title, @IsAnonymous, JSON_QUERY(@Questions))";
 
-        private const string AnswerSurveyStatement = "Insert into Answers (SurveyID, UserID, Answers) Values (@SurveyID, @UserID, @Answers)";
+        private const string AnswerSurveyStatement = "Insert into Answers (SurveyID, UserID, Answers) Values (@SurveyID, @UserID, JSON_QUERY(@Answers))";
 
         #endregion
 
@@ -40,6 +42,27 @@ namespace DynamicSurveyRestService.DataAccess
 
         #region Methods
 
+        public async Task<GetOneSurveyResponseDto> GetOne(int id)
+        {
+            GetOneSurveyResponseDto response = new GetOneSurveyResponseDto();
+
+            using (SqlConnection connection = await _dbContext.OpenConnectionAsync())
+            {
+                using (SqlCommand command = new SqlCommand(GetOneStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    while (reader.Read())
+                    {
+                        response.Survey = ReadSurvey(reader);
+                    }
+                }
+            }
+
+            return response;
+        }
 
         public async Task<CreateSurveyResponseDto> CreateSurveyAsync(Survey survey)
         {
@@ -102,6 +125,24 @@ namespace DynamicSurveyRestService.DataAccess
 
         #endregion
 
+
+        #region HelpMethods
+
+        private Survey ReadSurvey(SqlDataReader reader)
+        {
+            Survey tempSurvey = new Survey
+            {
+                Id = reader.GetInt32(0),
+                CreatorId = reader.GetInt32(1),
+                Title = reader.GetString(2),
+                IsAnonymous = reader.GetBoolean(3),
+                Questions = JsonConvert.DeserializeObject<List<Question>>(reader.GetString(4))
+            };
+
+            return tempSurvey;
+        }
+
+        #endregion
 
     }
 }

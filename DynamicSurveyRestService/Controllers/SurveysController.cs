@@ -41,9 +41,9 @@ namespace DynamicSurveyRestService.Controllers
 
         // GET api/<SurveysController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<GetOneSurveyResponseDto> Get(int id)
         {
-            return "value";
+            return await _repository.GetOne(id);
         }
 
         // POST api/<SurveysController>
