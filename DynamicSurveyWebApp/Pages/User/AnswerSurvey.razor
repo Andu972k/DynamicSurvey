@@ -1,0 +1,60 @@
+﻿@page "/User/AnswerSurvey"
+@inject HttpClient Http
+
+
+<h3>AnswerSurvey</h3>
+
+<br/>
+
+
+
+@code {
+
+
+
+    public class Survey
+    {
+        
+    #region Properties
+
+        public int Id { get; set; }
+
+        public int CreatorId { get; set; }
+
+        public string Title { get; set; }
+
+        public bool IsAnonymous { get; set; }
+
+        public List<Question> Questions { get; set; }
+
+    #endregion
+
+    }
+
+    public class Question
+    {
+    #region Properties
+
+        public string QuestionText { get; set; }
+
+        public int QuestionType { get; set; }
+
+        public Answer Answer { get; set; }
+
+    #endregion
+    }
+
+    public class Answer
+    {
+        
+    #region Properties
+
+        public string AnswerText { get; set; }
+
+    #endregion
+
+    }
+
+
+
+}
