@@ -15,10 +15,9 @@
 <br/>
 <br/>
 
-@*<span @bind-value="Response" @bind-value:Event="onclick" @bind-value:format="">
-    
-</span>*@
-
+<span>
+    @Response
+</span>
 
 
 @code {
@@ -66,6 +65,8 @@
         CreateSurveyResponseDto response = await responseMessage.Content.ReadFromJsonAsync<CreateSurveyResponseDto>();
 
         Response = response.ResponseMessage;
+
+        StateHasChanged();
     }
 
     protected override void OnInitialized()
