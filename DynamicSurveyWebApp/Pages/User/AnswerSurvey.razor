@@ -1,4 +1,6 @@
 ﻿@page "/User/AnswerSurvey"
+@using DynamicSurveyWebApp.Model
+@using DynamicSurveyWebApp.Dto
 @inject HttpClient Http
 
 
@@ -6,55 +8,122 @@
 
 <br/>
 
+<input @bind-value="SurveyToGet" type="number" placeholder="Survey ID"/>
 
+<button @onclick="GetOneSurveyAsync">Get Survey</button>
+
+<input @bind-value="UserId" type="number" placeholder="User ID"/>
+
+<br/>
+<br/>
+
+<span>
+    @CurrentQuestion
+</span>
+
+<br/>
+<br/>
+
+<input @bind-value="CurrentAnswer" type="text" placeholder="Answer" width="100" height="100" size="100"/>
+
+<br/>
+<br/>
+
+<button @onclick="AddAnswer">Add</button>
+<button @onclick="AnswerSurveyAsync">Finish</button>
+
+<span>
+    @Response
+</span>
 
 @code {
 
 
+    public int SurveyToGet { get; set; }
 
-    public class Survey
+    public Survey SurveyToAnswer { get; set; }
+
+    public string CurrentQuestion { get; set; }
+
+    public int CurrentQuestionId { get; set; }
+
+    public int UserId { get; set; }
+
+    public string CurrentAnswer { get; set; }
+
+    public AnswerSurveyDto AnswerForSurvey { get; set; }
+
+    public string Response { get; set; }
+
+    public async void GetOneSurveyAsync()
     {
-        
-    #region Properties
+        GetOneSurveyResponseDto tempSurvey = await Http.GetFromJsonAsync<GetOneSurveyResponseDto>("http://localhost:57030/Api/Surveys/" + SurveyToGet);
 
-        public int Id { get; set; }
+        SurveyToAnswer = tempSurvey.Survey;
 
-        public int CreatorId { get; set; }
+        CurrentQuestion = SurveyToAnswer.Questions[0].QuestionText;
 
-        public string Title { get; set; }
-
-        public bool IsAnonymous { get; set; }
-
-        public List<Question> Questions { get; set; }
-
-    #endregion
+        StateHasChanged();
 
     }
 
-    public class Question
+    public void AddAnswer()
     {
-    #region Properties
+        Answer tempAnswer = new Answer
+        {
+            AnswerText = CurrentAnswer
+        };
 
-        public string QuestionText { get; set; }
+        SurveyToAnswer.Questions[CurrentQuestionId].Answer = tempAnswer;
 
-        public int QuestionType { get; set; }
+        CurrentQuestionId++;
 
-        public Answer Answer { get; set; }
+        if (!(CurrentQuestionId > SurveyToAnswer.Questions.Count-1))
+        {
+            CurrentQuestion = SurveyToAnswer.Questions[CurrentQuestionId].QuestionText;
+        }
+        else
+        {
+            CurrentQuestion = "Survey is Done";
+        }
 
-    #endregion
+        CurrentAnswer = "";
+
     }
 
-    public class Answer
+    public async void AnswerSurveyAsync()
     {
-        
-    #region Properties
+        foreach (Question question in SurveyToAnswer.Questions)
+        {
+            Tuple<string, int, string> tempTuple = new Tuple<string, int, string>(question.QuestionText, question.QuestionType, question.Answer.AnswerText);
 
-        public string AnswerText { get; set; }
+            AnswerForSurvey.Answers.Add(tempTuple);
+        }
 
-    #endregion
+        AnswerForSurvey.SurveyId = SurveyToAnswer.Id;
+        AnswerForSurvey.Title = SurveyToAnswer.Title;
+        AnswerForSurvey.UserId = UserId;
 
+        HttpResponseMessage responseMessage = await Http.PostAsJsonAsync("http://localhost:57030/Api/Surveys/Answer", AnswerForSurvey);
+
+        AnswerSurveyResponseDto response = await responseMessage.Content.ReadFromJsonAsync<AnswerSurveyResponseDto>();
+
+        Response = response.ResponseMessage;
+
+        StateHasChanged();
     }
 
+    protected override void OnInitialized()
+    {
+        SurveyToAnswer = new Survey();
 
+        SurveyToAnswer.Questions = new List<Question>();
 
+        AnswerForSurvey = new AnswerSurveyDto();
+
+        AnswerForSurvey.Answers = new List<Tuple<string, int, string>>();
+
+        CurrentQuestionId = 0;
+
+    }
 }

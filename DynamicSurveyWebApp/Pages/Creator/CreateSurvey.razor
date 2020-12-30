@@ -1,4 +1,5 @@
 ﻿@page "/creator/createsurvey"
+@using DynamicSurveyWebApp.Dto
 @inject HttpClient Http
 
 <h3>CreateSurvey</h3>
@@ -75,38 +76,4 @@
 
         SurveyDto.Questions = new List<Tuple<string, int>>();
     }
-
-
-    public class CreateSurveyDto
-    {
-
-        #region Properties
-
-        public int CreatorId { get; set; }
-
-        public string Title { get; set; }
-
-        public bool IsAnonymous { get; set; }
-
-        public List<Tuple<string, int>> Questions { get; set; }
-
-        #endregion
-
-        public CreateSurveyDto()
-        {
-
-        }
-
-    }
-
-    public class CreateSurveyResponseDto
-    {
-
-        #region Properties
-
-        public string ResponseMessage { get; set; }
-
-        #endregion
-    }
-
 }
