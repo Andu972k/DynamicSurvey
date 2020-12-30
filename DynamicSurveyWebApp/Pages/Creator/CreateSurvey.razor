@@ -9,7 +9,7 @@
 <input @bind-value="SurveyDto.Title" type="text" placeholder="Title" width="100" height="100" size="100" />
 
 <input @bind-value="QuestionText" name="QuestionText" type="text" placeholder="Question Text" width="100" height="100" size="100" />
-@*@bind-value="QuestionText"*@
+
 <button @onclick="AddQuestion">Add</button>
 <button @onclick="Create">Create</button>
 
@@ -23,26 +23,14 @@
 
 @code {
 
-    [Parameter]
+    
     public string QuestionText { get; set; }
 
-    [Parameter]
+    
     public CreateSurveyDto SurveyDto { get; set; }
 
     
     public string Response { get; set; }
-
-
-
-    /*
-     * <input @bind="SurveyDto.CreatorId" type="number" placeholder="Creator Id"/>
-
-<input @bind="SurveyDto.Title" type="text" placeholder="Question Text" width="100" height="100" size="100"/>
-
-<input @bind="QuestionText" type="text" placeholder="Question Text" width="100" height="100" size="100"/>
-
-<button @onclick="AddQuestion">Add</button>
-     */
 
 
 
@@ -51,11 +39,9 @@
 
         Tuple<string, int> questionTuple = new Tuple<string, int>(QuestionText, 1);
 
-
-
         SurveyDto.Questions.Add(questionTuple);
 
-        Console.WriteLine(SurveyDto.Questions);
+        QuestionText = "";
 
     }
 
@@ -75,5 +61,7 @@
         SurveyDto = new CreateSurveyDto();
 
         SurveyDto.Questions = new List<Tuple<string, int>>();
+
+        SurveyDto.IsAnonymous = true;
     }
 }
