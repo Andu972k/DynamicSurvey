@@ -42,7 +42,7 @@ namespace DynamicSurveyRestService.DataAccess
 
         #region Methods
 
-        public async Task<GetOneSurveyResponseDto> GetOne(int id)
+        public async Task<GetOneSurveyResponseDto> GetOneAsync(int id)
         {
             GetOneSurveyResponseDto response = new GetOneSurveyResponseDto();
 

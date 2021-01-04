@@ -11,7 +11,7 @@
 <input @bind-value="QuestionText" name="QuestionText" type="text" placeholder="Question Text" width="100" height="100" size="100" />
 
 <button @onclick="AddQuestion">Add</button>
-<button @onclick="Create">Create</button>
+<button @onclick="CreateAsync">Create</button>
 
 <br/>
 <br/>
@@ -45,7 +45,7 @@
 
     }
 
-    public async void Create()
+    public async void CreateAsync()
     {
         HttpResponseMessage responseMessage = await Http.PostAsJsonAsync("http://localhost:57030/Api/Surveys", SurveyDto);
 

@@ -41,14 +41,14 @@ namespace DynamicSurveyRestService.Controllers
 
         // GET api/<SurveysController>/5
         [HttpGet("{id}")]
-        public async Task<GetOneSurveyResponseDto> Get(int id)
+        public async Task<GetOneSurveyResponseDto> GetOneSurveyAsync(int id)
         {
-            return await _repository.GetOne(id);
+            return await _repository.GetOneAsync(id);
         }
 
         // POST api/<SurveysController>
         [HttpPost]
-        public async Task<CreateSurveyResponseDto> Post([FromBody] CreateSurveyDto surveyInformation)
+        public async Task<CreateSurveyResponseDto> CreateSurveyAsync([FromBody] CreateSurveyDto surveyInformation)
         {
             Survey tempSurvey = new Survey(surveyInformation);
 
