@@ -60,7 +60,7 @@ namespace DynamicSurveyRestService.Controllers
 
         [HttpPost]
         [Route("Answer")]
-        public async Task<AnswerSurveyResponseDto> Answer([FromBody] AnswerSurveyDto answer)
+        public async Task<AnswerSurveyResponseDto> AnswerAsync([FromBody] AnswerSurveyDto answer)
         {
             Survey tempSurvey = new Survey( null, answer);
 
