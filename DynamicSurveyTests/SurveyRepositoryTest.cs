@@ -32,7 +32,7 @@ namespace DynamicSurveyTests
             Survey testSurvey = new Survey(new CreateSurveyDto{ CreatorId = 1, IsAnonymous = true, Questions = testList, Title = "UnitTestTitle"});
 
             //Act
-            Task<CreateSurveyResponseDto> responseTask = repository.CreateSurvey(testSurvey);
+            Task<CreateSurveyResponseDto> responseTask = repository.CreateSurveyAsync(testSurvey);
 
             CreateSurveyResponseDto response = responseTask.Result;
 
