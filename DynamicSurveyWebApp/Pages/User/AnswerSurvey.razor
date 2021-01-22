@@ -59,7 +59,9 @@
 <br/>
 
 <div class="container">
-    <input @bind-value="CurrentAnswer" @bind-value:event="oninput" type="text" placeholder="Enter Answer" width="100" height="100" size="100" />
+    <div class="form-group">
+        <textarea @bind-value="CurrentAnswer" @bind-value:event="oninput" class="form-control" placeholder="Enter Answer" rows="5"></textarea>
+    </div>
 </div>
 
 <br/>
@@ -69,20 +71,20 @@
 
     @if (SurveyToAnswer.Questions.Count < 1 || string.IsNullOrWhiteSpace(CurrentAnswer))
     {
-        <button @onclick="AddAnswer" class="btn btn-outline-primary disabled" disabled="disabled">Add</button>
+        <button @onclick="AddAnswer" class="btn btn-outline-primary disabled" title="Click to add your answer to the question" disabled="disabled">Add</button>
     }
     else
     {
-        <button @onclick="AddAnswer" class="btn btn-primary">Add</button>
+        <button @onclick="AddAnswer" class="btn btn-primary" title="Click to add your answer to the question">Add</button>
     }
 
     @if (CurrentQuestionId <= SurveyToAnswer.Questions.Count-1 || UserId < 1)
     {
-        <button @onclick="AnswerSurveyAsync" class="btn btn-outline-success disabled" disabled="disabled">Finish</button>
+        <button @onclick="AnswerSurveyAsync" class="btn btn-outline-success disabled" title="Click to finish answering survey" disabled="disabled">Finish</button>
     }
     else
     {
-        <button @onclick="AnswerSurveyAsync" class="btn btn-success">Finish</button>
+        <button @onclick="AnswerSurveyAsync" class="btn btn-success" title="Click to finish answering survey">Finish</button>
     }
 </div>
 

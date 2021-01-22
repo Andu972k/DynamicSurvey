@@ -16,16 +16,19 @@
 
     <div>
         <h6>Title</h6>
-        <input @bind-value="SurveyDto.Title" @bind-value:event="oninput" type="text" placeholder="Enter Survey Title" width="100" height="100" size="100"/>
+        <input @bind-value="SurveyDto.Title" @bind-value:event="oninput" class="w-100" type="text" placeholder="Enter Survey Title"/>
     </div>
 </div>
 
 <br/>
 
 <div class="container">
-    <h6>Question</h6>
-    <input @bind-value="QuestionText" @bind-value:event="oninput" name="QuestionText" type="text" placeholder="Enter Question" width="100" height="100" size="100" />
+    <div class="form-group">
+        <h6>Question</h6>
+        <textarea @bind-value="QuestionText" @bind-value:event="oninput" class="form-control" placeholder="Enter Question" rows="5"></textarea>
+    </div>
 </div>
+
 
 <br/>
 
@@ -33,20 +36,20 @@
 
     @if (string.IsNullOrWhiteSpace(QuestionText))
     {
-        <button @onclick="AddQuestion" class="btn btn-outline-primary disabled" disabled="disabled">Add</button>
+        <button @onclick="AddQuestion" class="btn btn-outline-primary disabled" title="Click to add your question to the survey" disabled="disabled">Add</button>
     }
     else
     {
-        <button @onclick="AddQuestion" class="btn btn-primary">Add</button>
+        <button @onclick="AddQuestion" class="btn btn-primary" title="Click to add your question to the survey">Add</button>
     }
 
     @if (SurveyDto.CreatorId < 1 || SurveyDto.Questions.Count < 1 || string.IsNullOrWhiteSpace(SurveyDto.Title))
     {
-        <button @onclick="CreateAsync" class="btn btn-outline-success disabled" disabled="disabled">Create</button>
+        <button @onclick="CreateAsync" class="btn btn-outline-success disabled" title="Click to finish creating your survey" disabled="disabled">Create</button>
     }
     else
     {
-        <button @onclick="CreateAsync" class="btn btn-success">Create</button>
+        <button @onclick="CreateAsync" class="btn btn-success" title="Click to finish creating your survey">Create</button>
     }
 
 
